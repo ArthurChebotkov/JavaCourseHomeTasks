@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30c86d2a-8ae9-45e2-ae21-3b07d7ca3172" name="Changes" comment="" />
+    <list default="true" id="ef22b0d7-5e02-4dd1-830a-0eba34a689c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lesson_2_Task_7.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,12 +22,12 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2C7XyFaq5RJQYw0xhCEpTDWg8IM" />
+  <component name="ProjectId" id="2CTuQ0Z3C4Lvn34g7wWTf22nqH7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,13 +37,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/arthurchebotkov/Desktop/JavaCourseHomeTaskGit/Lesson_1/Lesson_1_Task_3"
+    "last_opened_file_path": "/Users/arthurchebotkov/Desktop/JavaCourse/Lesson_2_Task_7"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Lesson_1_Task_3" />
+      <module name="Lesson_2_Task_7" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -50,11 +57,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="30c86d2a-8ae9-45e2-ae21-3b07d7ca3172" name="Changes" comment="" />
-      <created>1658154849718</created>
+      <changelist id="ef22b0d7-5e02-4dd1-830a-0eba34a689c2" name="Changes" comment="" />
+      <created>1658838875991</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1658154849718</updated>
+      <updated>1658838875991</updated>
     </task>
     <servers />
   </component>
