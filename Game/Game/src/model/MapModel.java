@@ -30,9 +30,6 @@ public class MapModel{
         this.parseMapToItems(pathToFile);
     }
 
-    public Character[][] getMap() {
-        return map;
-    }
 
     private void parseMap(String pathToFile) throws IOException {
         FileReader reader = new FileReader(pathToFile);
