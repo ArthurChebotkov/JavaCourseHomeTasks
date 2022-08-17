@@ -81,4 +81,17 @@ public class MapModel{
         return mapCopy;
     }
 
+    public boolean hasCollision (Position target) {
+        for (Brick brick: wall) {
+            if (target.getX() == brick.position.getY() && target.getY() == brick.position.getX() ) {
+                return false;
+            }
+        }
+        for (Floor floor: listFloor) {
+            if (target.getX() == floor.position.getY() && target.getY() == floor.position.getX() ) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import model.Position;
+
 public class Command {
     private GameController gameController;
     public Command(GameController gameController) {
@@ -9,16 +11,24 @@ public class Command {
     public void execute(String event) {
         switch (event) {
             case "w":
-                gameController.getPlayer().getPosition().moveUp();
+                if(gameController.getMapModel().hasCollision(gameController.getPlayer().getPosition().lookUp())) {
+                    gameController.getPlayer().getPosition().moveUp();
+                }
                 break;
             case "s":
-                gameController.getPlayer().getPosition().moveDown();
+                if(gameController.getMapModel().hasCollision(gameController.getPlayer().getPosition().lookDown())) {
+                    gameController.getPlayer().getPosition().moveDown();
+                }
                 break;
             case "a":
-                gameController.getPlayer().getPosition().moveLeft();
+                if(gameController.getMapModel().hasCollision(gameController.getPlayer().getPosition().lookLeft())) {
+                    gameController.getPlayer().getPosition().moveLeft();
+                }
                 break;
             case "d":
-                gameController.getPlayer().getPosition().moveRight();
+                if(gameController.getMapModel().hasCollision(gameController.getPlayer().getPosition().lookRight())) {
+                    gameController.getPlayer().getPosition().moveRight();
+                }
                 break;
             case "q":
                 gameController.setRunning(false);

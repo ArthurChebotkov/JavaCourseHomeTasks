@@ -28,4 +28,17 @@ public class Position {
         this.y++;
     }
 
+    public Position lookUp() {
+        return new Position(this.x-1,this.y);
+    }
+    public Position lookDown() {
+        return new Position(this.x+1,this.y);
+    }
+    public Position lookLeft() {
+        return new Position(this.x,this.y-1);
+    }
+    public Position lookRight() {
+        return new Position(this.x,this.y+1);
+    }
+
 }
