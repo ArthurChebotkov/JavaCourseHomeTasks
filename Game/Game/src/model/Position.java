@@ -1,7 +1,10 @@
 package model;
 
 public class Position {
+    //Number of line
     private int x;
+
+    //Number of element in line
     private int y;
 
     public Position(int x, int y) {
@@ -12,33 +15,23 @@ public class Position {
     public int getX() { return x; }
     public int getY() { return y; }
 
-    public void moveUp() {
-        this.x--;
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public void moveDown() {
-        this.x++;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public void moveLeft() {
-        this.y--;
-    }
-
-    public void moveRight() {
-        this.y++;
-    }
-
-    public Position lookUp() {
-        return new Position(this.x-1,this.y);
-    }
-    public Position lookDown() {
-        return new Position(this.x+1,this.y);
-    }
-    public Position lookLeft() {
-        return new Position(this.x,this.y-1);
-    }
-    public Position lookRight() {
-        return new Position(this.x,this.y+1);
+    public boolean equals(Position position) {
+        if (this.x == position.getX() && this.y == position.getY()){
+            return true;
+        }
+        return false;
     }
 
 }
