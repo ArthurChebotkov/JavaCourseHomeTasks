@@ -2,8 +2,12 @@ package systems;
 
 import engine.GameEngine;
 import model.Position;
-import model.entities.Brick;
+import model.actors.Actor;
+import model.actors.KillerPlayer;
+import model.actors.Player;
 import model.entities.Coin;
+import model.entities.Entity;
+import model.entities.Thorn;
 
 public class CollisionSystem {
     private GameEngine gameEngine;
@@ -12,39 +16,59 @@ public class CollisionSystem {
         this.gameEngine = gameEngine;
     }
 
-    public boolean hasCollision(Position target) {
-        for (Brick brick : gameEngine.getScene().getWall()) {
-            if (target.equals(brick.position)) {
+
+    public void update(Position position) {
+        Player player = (Player) (gameEngine.getScene().getActorsByName("player"));
+
+        for (int i = 0; i < gameEngine.getScene().getItemsByName("coins").size(); i++) {
+            if (position.equals(gameEngine.getScene().getItemsByName("coins").get(i).getPosition())) {
+                Coin coin = (Coin) gameEngine.getScene().getItemsByName("coins").get(i);
+                player.setMoney(player.getMoney()+coin.getValueCoin());
+                gameEngine.getScene().getItemsByName("coins").remove(i);
+                break;
+            }
+        }
+        int numberOfTargetTeleport = 0;
+        for (int i = 0; i < gameEngine.getScene().getItemsByName("teleports").size(); i++) {
+            if (position.equals(gameEngine.getScene().getItemsByName("teleports").get(i).getPosition())) {
+                numberOfTargetTeleport = gameEngine.getScene().getItemsByName("teleports").size() - i - 1;
+                gameEngine.getMoveSystem().moveToPosition("player", gameEngine.getScene().getItemsByName("teleports").get(numberOfTargetTeleport).getPosition());
+                break;
+            }
+        }
+
+        for (int i = 0; i < gameEngine.getScene().getItemsByName("thorns").size(); i++) {
+            if (position.equals(gameEngine.getScene().getItemsByName("thorns").get(i).getPosition())) {
+                Thorn thorn = (Thorn) (gameEngine.getScene().getItemsByName("thorns").get(i));
+                player.decrementHealth(thorn.getDamage());
+                break;
+            }
+        }
+
+        KillerPlayer killerPlayer = (KillerPlayer) (gameEngine.getScene().getActorsByName("killerPlayer"));
+        if(gameEngine.getScene().getActorsByName("killerPlayer").getLiveValue() == Actor.LiveValue.LIVE) {
+            if(position.equals(killerPlayer.getPosition())){
+                player.decrementHealth(killerPlayer.getDamage());
+            }
+        }
+    }
+
+    public boolean hasCollisionWithWall(Position target) {
+        for (Entity brick : gameEngine.getScene().getTerrainByName("wall")) {
+            if (target.equals(brick.getPosition())) {
                 return false;
             }
         }
         return true;
     }
 
-    public void update(Position position) {
-        for(int i=0; i < gameEngine.getScene().getCoins().size(); i++) {
-            if (position.equals(gameEngine.getScene().getCoins().get(i).position)) {
-                gameEngine.getPlayer().money += 1;
-                gameEngine.getScene().getCoins().remove(i);
-                break;
+    public void playerHit() {
+        KillerPlayer killerPlayer = (KillerPlayer) (gameEngine.getScene().getActorsByName("killerPlayer"));
+        if (killerPlayer.getLiveValue() == Actor.LiveValue.LIVE) {
+            if (gameEngine.getScene().getActorsByName("player").getPosition().reachToPosition(killerPlayer.getPosition())) {
+                killerPlayer.decrementHealth(gameEngine.getInventoryModel().getCurrentToolHitValue());
             }
         }
-        int numberOfTargetTeleport = 0;
-        for(int i=0; i < gameEngine.getScene().getTeleports().size(); i++) {
-            if (position.equals(gameEngine.getScene().getTeleports().get(i).position)) {
-                numberOfTargetTeleport = gameEngine.getScene().getTeleports().size()-i-1;
-                gameEngine.getMoveSystem().moveToPosition(gameEngine.getScene().getTeleports().get(numberOfTargetTeleport).position);
-                break;
-            }
-        }
-
-        for(int i=0; i < gameEngine.getScene().getThorns().size(); i++) {
-            if (position.equals(gameEngine.getScene().getThorns().get(i).position)) {
-                gameEngine.getPlayer().health -= gameEngine.getScene().getThorns().get(i).getDamage();
-                break;
-            }
-        }
-
     }
 }
 

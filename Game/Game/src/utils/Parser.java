@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface Parser {
-    Character[][] parseMap(String pathToFile) throws IOException;
-    HashMap<String,ArrayList> parseMapToItemsLevel0(String pathToFile) throws IOException;
-    HashMap<String,ArrayList> parseMapToItemsLevel1(String pathToFile) throws IOException;
+    Character[][] parseMapTerrainToArray(String pathToFile) throws IOException;
+    HashMap<String,ArrayList> parseMapToTerrain(String pathToFile) throws IOException;
+    HashMap<String,ArrayList> parseMapToItems(String pathToFile) throws IOException;
 }

@@ -1,6 +1,7 @@
 package utils;
 
 import model.Position;
+import model.entities.Thorn;
 import model.entities.*;
 
 import java.io.FileReader;
@@ -16,7 +17,7 @@ public class ParserText implements Parser{
     }
 
 
-    public Character[][] parseMap(String pathToFile) throws IOException {
+    public Character[][] parseMapTerrainToArray(String pathToFile) throws IOException {
         Character[][] map = new Character[DEFAULT_HEIGHT][DEFAULT_WIDTH];
         FileReader reader = new FileReader(pathToFile);
         Scanner scanner = new Scanner(reader);
@@ -32,7 +33,7 @@ public class ParserText implements Parser{
         return map;
     }
 
-    public HashMap<String,ArrayList> parseMapToItemsLevel0(String pathToFile) throws IOException {
+    public HashMap<String,ArrayList> parseMapToTerrain(String pathToFile) throws IOException {
 
         HashMap<String,ArrayList> hashMap = new HashMap<>();
         ArrayList<Brick> wall = new ArrayList<Brick>();
@@ -65,7 +66,7 @@ public class ParserText implements Parser{
         return hashMap;
     }
 
-    public HashMap<String,ArrayList> parseMapToItemsLevel1(String pathToFile) throws IOException {
+    public HashMap<String,ArrayList> parseMapToItems(String pathToFile) throws IOException {
 
         HashMap<String,ArrayList> hashMap = new HashMap<>();
 

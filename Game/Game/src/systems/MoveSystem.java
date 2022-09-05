@@ -10,45 +10,38 @@ public class MoveSystem {
         this.gameEngine = gameEngine;
     }
 
-    public void moveUp() {
-        gameEngine.getPlayer().position.setX(gameEngine.getPlayer().position.getX()-1);
+    public void moveUp(String entityName) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setX(gameEngine.getScene().getActorsByName(entityName).getPosition().getX()-1);
     }
-
-    public void moveDown() {
-        gameEngine.getPlayer().position.setX(gameEngine.getPlayer().position.getX()+1);
+    public void moveDown(String entityName) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setX(gameEngine.getScene().getActorsByName(entityName).getPosition().getX()+1);
     }
-
-    public void moveLeft() {
-        gameEngine.getPlayer().position.setY(gameEngine.getPlayer().position.getY()-1);
+    public void moveLeft(String entityName) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setY(gameEngine.getScene().getActorsByName(entityName).getPosition().getY()-1);
     }
-
-    public void moveRight() {
-        gameEngine.getPlayer().position.setY(gameEngine.getPlayer().position.getY()+1);
+    public void moveRight(String entityName) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setY(gameEngine.getScene().getActorsByName(entityName).getPosition().getY()+1);
     }
-
-    public void moveTo(int x, int y) {
-        gameEngine.getPlayer().position.setPosition(x,y);
+    public void moveTo(String entityName, int x, int y) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setPosition(x,y);
     }
-
-    public void moveToPosition(Position position) {
-        gameEngine.getPlayer().position.setPosition(position.getX(),position.getY());
+    public void moveToPosition(String entityName, Position position) {
+        gameEngine.getScene().getActorsByName(entityName).getPosition().setPosition(position.getX(),position.getY());
     }
-
-    public Position getCurrentPosition() {
-        return new Position(gameEngine.getPlayer().position.getX(),gameEngine.getPlayer().position.getY());
+    public Position getCurrentPosition(String entityName) {
+        return new Position(gameEngine.getScene().getActorsByName(entityName).getPosition().getX(),gameEngine.getScene().getActorsByName(entityName).getPosition().getY());
     }
-
-    public Position lookUp() {
-        return new Position(gameEngine.getPlayer().position.getX()-1,gameEngine.getPlayer().position.getY());
+    public Position lookUp(String entityName) {
+        return new Position(gameEngine.getScene().getActorsByName(entityName).getPosition().getX()-1,gameEngine.getScene().getActorsByName(entityName).getPosition().getY());
     }
-    public Position lookDown() {
-        return new Position(gameEngine.getPlayer().position.getX()+1,gameEngine.getPlayer().position.getY());
+    public Position lookDown(String entityName) {
+        return new Position(gameEngine.getScene().getActorsByName(entityName).getPosition().getX()+1,gameEngine.getScene().getActorsByName(entityName).getPosition().getY());
     }
-    public Position lookLeft() {
-        return new Position(gameEngine.getPlayer().position.getX(),gameEngine.getPlayer().position.getY()-1);
+    public Position lookLeft(String entityName) {
+        return new Position(gameEngine.getScene().getActorsByName(entityName).getPosition().getX(),gameEngine.getScene().getActorsByName(entityName).getPosition().getY()-1);
     }
-    public Position lookRight() {
-        return new Position(gameEngine.getPlayer().position.getX(),gameEngine.getPlayer().position.getY()+1);
+    public Position lookRight(String entityName) {
+        return new Position(gameEngine.getScene().getActorsByName(entityName).getPosition().getX(),gameEngine.getScene().getActorsByName(entityName).getPosition().getY()+1);
     }
 
 

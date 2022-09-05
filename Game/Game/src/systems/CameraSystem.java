@@ -1,13 +1,16 @@
 package systems;
 
 import engine.GameEngine;
-import model.entities.Coin;
-import model.entities.Teleport;
-import model.entities.Thorn;
+import model.actors.Actor;
+import model.actors.Player;
+import model.entities.Entity;
+
+import javax.swing.text.PlainDocument;
+import java.util.ArrayList;
 
 public class CameraSystem {
-    public static final int DEFAULT_WIDTH = 37;
-    public static final int DEFAULT_HEIGHT = 14;
+    private static final int DEFAULT_WIDTH = 37;
+    private static final int DEFAULT_HEIGHT = 14;
 
     private Character[][] outputScreen;
 
@@ -18,27 +21,23 @@ public class CameraSystem {
         this.gameEngine = gameEngine;
         this.outputScreen = new Character[DEFAULT_HEIGHT][DEFAULT_WIDTH];
         this.printTitle();
-        this.printMenu();
+        this.printInstructions();
     }
 
-
-    public void update(){
+    public void update() {
         outputScreen = gameEngine.getScene().getMapModel().copy();
 
-        for(Coin coin : gameEngine.getScene().getCoins()) {
-            outputScreen[coin.position.getX()][coin.position.getY()] = coin.icon;
+        for (ArrayList<Entity> entities : gameEngine.getScene().getItemsArrayList()) {
+            for (Entity entity : entities) {
+                outputScreen[entity.getPosition().getX()][entity.getPosition().getY()] = entity.getIcon();
+            }
         }
 
-        for(Teleport teleport:gameEngine.getScene().getTeleports()) {
-            outputScreen[teleport.position.getX()][teleport.position.getY()] = teleport.icon;
-        }
-
-        for(Thorn thorn:gameEngine.getScene().getThorns()) {
-            outputScreen[thorn.position.getX()][thorn.position.getY()] = thorn.icon;
-        }
-
-        outputScreen[gameEngine.getPlayer().position.getX()][gameEngine.getPlayer().position.getY()] =
-                gameEngine.getPlayer().icon;
+        gameEngine.getScene().getActors().forEach((k,v) -> {
+            if(v.getLiveValue() == Actor.LiveValue.LIVE) {
+                outputScreen[v.getPosition().getX()][v.getPosition().getY()] = v.getIcon();
+            }
+        });
 
         this.draw();
     }
@@ -50,25 +49,62 @@ public class CameraSystem {
             }
             System.out.println();
         }
-        System.out.println("Coins: " + gameEngine.getPlayer().money);
-        System.out.println("Healts: " + gameEngine.getPlayer().health);
-    }
-    public void printTitle(){
-        System.out.println("" +
-                "╔═══╗╔══╗╔╗──╔╗╔═══╗\n" +
-                "║╔══╝║╔╗║║║──║║║╔══╝\n" +
-                "║║╔═╗║╚╝║║╚╗╔╝║║╚══╗\n" +
-                "║║╚╗║║╔╗║║╔╗╔╗║║╔══╝\n" +
-                "║╚═╝║║║║║║║╚╝║║║╚══╗\n" +
-                "╚═══╝╚╝╚╝╚╝──╚╝╚═══╝\n");
+
+        Player player = (Player) gameEngine.getScene().getActorsByName("player");
+        System.out.println("Coins: " + player.getMoney());
+        System.out.println("Health: " + player.getHealth());
+
+        if(gameEngine.getScene().getActorsByName("killerPlayer").getLiveValue() == Actor.LiveValue.LIVE) {
+            System.out.println("Killer health: " + gameEngine.getScene().getActorsByName("killerPlayer").getHealth());
+        }
     }
 
-    public void printMenu(){
-        System.out.println("MENU:");
+    public void printTitle() {
+        System.out.println("" +
+                "╔═╗ ╔╗ ╔╦╗ ╔═\n" +
+                "║╔╗ ╠╣ ║║║ ╠═\n" +
+                "╚═╝ ║║ ║║║ ╚═\n");
+
+    }
+
+    public void printInstructions() {
+        System.out.println("Instructions:");
         System.out.println("(w) - Press to Move Up");
-        System.out.println("(s) - Press toMove Down");
-        System.out.println("(a) - Press toMove Left");
+        System.out.println("(s) - Press to Move Down");
+        System.out.println("(a) - Press to Move Left");
         System.out.println("(d) - Press to Move Right");
+        System.out.println("(§) - Press to Attack");
+        System.out.println("(i) - Press to see stuff information");
+        System.out.println("(1) - Press to choose Axe");
+        System.out.println("(2) - Press to choose Pickaxe");
         System.out.println("(q) - Press to Quit Game\n");
     }
+
+    public void printToolsInformation() {
+        String[] selectedItems = new String[2];
+
+        if (gameEngine.getInventoryModel().selectedIndex == 0) {
+            selectedItems[0] = " <--";
+            selectedItems[1] = "";
+        } else {
+            selectedItems[0] = "";
+            selectedItems[1] = " <--";
+        }
+
+        for (int i = 0; i < gameEngine.getInventoryModel().items.size(); i++) {
+            System.out.print(gameEngine.getInventoryModel().items.get(i).getName()
+                    + " " + gameEngine.getInventoryModel().items.get(i).getValue());
+            System.out.println(selectedItems[i]);
+        }
+
+    }
+
+    public void printQuit() {
+        System.out.println("\nQuitting");
+    }
+
+    public void printPlayerDead() {
+        System.out.println("\nHealts: " + gameEngine.getScene().getActorsByName("player").getHealth() + ". Player id dead!");
+    }
+
 }

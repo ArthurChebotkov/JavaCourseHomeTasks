@@ -9,12 +9,10 @@ public class MapModel {
 
     public static final int DEFAULT_WIDTH = 37;
     public static final int DEFAULT_HEIGHT = 15;
-
     private Character[][] card;
 
-    public MapModel(String pathToFileLevel0) throws IOException {
-        Parser parser = new ParserText();
-        this.card= parser.parseMap(pathToFileLevel0);
+    public MapModel(String pathToFileLevelTerrain, Parser parser) throws IOException {
+        this.card= parser.parseMapTerrainToArray(pathToFileLevelTerrain);
     }
 
     public Character[][] copy() {
