@@ -1,8 +1,8 @@
 package utils;
 
-import model.Position;
-import model.entities.Thorn;
-import model.entities.*;
+import models.Position;
+import models.entities.Thorn;
+import models.entities.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -73,6 +73,7 @@ public class ParserText implements Parser{
         ArrayList<Coin> coins = new ArrayList<Coin>();
         ArrayList<Teleport> teleports = new ArrayList<Teleport>();
         ArrayList<Thorn> thorns = new ArrayList<Thorn>();
+        ArrayList<FirstAid> firstAids = new ArrayList<FirstAid>();
 
         FileReader reader = new FileReader(pathToFile);
         Scanner scanner = new Scanner(reader);
@@ -90,6 +91,9 @@ public class ParserText implements Parser{
                     case 's':
                         thorns.add(new Thorn(new Position(indexLine,j)));
                         break;
+                    case '+':
+                        firstAids.add(new FirstAid(new Position(indexLine,j)));
+                        break;
                     default:
                         break;
                 }
@@ -101,6 +105,7 @@ public class ParserText implements Parser{
         hashMap.put("coins", coins);
         hashMap.put("teleports", teleports);
         hashMap.put("thorns", thorns);
+        hashMap.put("firstAid", firstAids);
 
         return hashMap;
     }

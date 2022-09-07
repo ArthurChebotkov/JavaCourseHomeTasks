@@ -1,6 +1,6 @@
 package engine;
 
-import model.InventoryModel;
+import models.InventoryModel;
 import systems.CollisionSystem;
 import systems.ControllerSystem;
 import systems.MoveSystem;

@@ -1,7 +1,5 @@
 package utils;
 
-import model.entities.Coin;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

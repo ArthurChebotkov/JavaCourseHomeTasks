@@ -1,13 +1,14 @@
 package systems;
 
 import engine.GameEngine;
-import model.Position;
-import model.actors.Actor;
-import model.actors.KillerPlayer;
-import model.actors.Player;
-import model.entities.Coin;
-import model.entities.Entity;
-import model.entities.Thorn;
+import models.Position;
+import models.actors.Actor;
+import models.actors.KillerPlayer;
+import models.actors.Player;
+import models.entities.Coin;
+import models.entities.Entity;
+import models.entities.FirstAid;
+import models.entities.Thorn;
 
 public class CollisionSystem {
     private GameEngine gameEngine;
@@ -45,6 +46,15 @@ public class CollisionSystem {
             }
         }
 
+/*        for (int i = 0; i < gameEngine.getScene().getItemsByName("firstAid").size(); i++) {
+            if (position.equals(gameEngine.getScene().getItemsByName("firstAid").get(i).getPosition())) {
+                FirstAid firstAid = (FirstAid) gameEngine.getScene().getItemsByName("firstAid").get(i);
+                player.incrementHealth(firstAid.getRepairHealthsValue());
+                gameEngine.getScene().getItemsByName("firstAid").remove(i);
+                break;
+            }
+        }*/
+
         KillerPlayer killerPlayer = (KillerPlayer) (gameEngine.getScene().getActorsByName("killerPlayer"));
         if(gameEngine.getScene().getActorsByName("killerPlayer").getLiveValue() == Actor.LiveValue.LIVE) {
             if(position.equals(killerPlayer.getPosition())){
@@ -67,6 +77,21 @@ public class CollisionSystem {
         if (killerPlayer.getLiveValue() == Actor.LiveValue.LIVE) {
             if (gameEngine.getScene().getActorsByName("player").getPosition().reachToPosition(killerPlayer.getPosition())) {
                 killerPlayer.decrementHealth(gameEngine.getInventoryModel().getCurrentToolHitValue());
+                if(killerPlayer.getLiveValue() == Actor.LiveValue.DEAD){
+                    killerPlayer.setPositionOfFirstAid();
+                    gameEngine.getScene().getItemsByName("firstAid").add(killerPlayer.getItemInside());
+
+                }
+            }
+        }
+    }
+
+    public void pickUpItem() {
+        for (int i = 0; i < gameEngine.getScene().getItemsByName("firstAid").size(); i++) {
+            FirstAid firstAid = (FirstAid) gameEngine.getScene().getItemsByName("firstAid").get(i);
+            if(gameEngine.getScene().getActorsByName("player").getPosition().reachToPosition(firstAid.getPosition())){
+                gameEngine.getInventoryModel().getItems().add(firstAid);
+                gameEngine.getScene().getItemsByName("firstAid").remove(i);
             }
         }
     }

@@ -1,11 +1,11 @@
 package scene;
 
 import map.MapModel;
-import model.Position;
-import model.actors.Actor;
-import model.actors.KillerPlayer;
-import model.actors.Player;
-import model.entities.*;
+import models.Position;
+import models.actors.Actor;
+import models.actors.KillerPlayer;
+import models.actors.Player;
+import models.entities.*;
 import utils.Parser;
 import utils.ParserText;
 
@@ -81,6 +81,8 @@ public class Scene {
                 return items.get("teleports");
             case "thorns":
                 return items.get("thorns");
+            case "firstAid":
+                return items.get("firstAid");
             default:
                 break;
         }
@@ -95,4 +97,7 @@ public class Scene {
         return itemArrayList;
     }
 
+    public HashMap<String, ArrayList> getItems() {
+        return items;
+    }
 }

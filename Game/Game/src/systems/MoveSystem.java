@@ -1,7 +1,7 @@
 package systems;
 
 import engine.GameEngine;
-import model.Position;
+import models.Position;
 
 public class MoveSystem {
     private GameEngine gameEngine;

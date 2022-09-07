@@ -1,9 +1,9 @@
 package systems;
 
 import engine.GameEngine;
-import model.actors.Actor;
-import model.actors.KillerPlayer;
-import model.actors.Player;
+import models.actors.Actor;
+import models.actors.KillerPlayer;
+import models.actors.Player;
 
 public class ControllerSystem {
     private GameEngine gameEngine;
@@ -49,18 +49,28 @@ public class ControllerSystem {
                 }
                 break;
             case "i":
-                gameEngine.getCameraSystem().printToolsInformation();
+                gameEngine.getCameraSystem().printArmsInformation();
                 break;
             case "1":
-                gameEngine.getInventoryModel().setSelectedItem(0);
-                gameEngine.getCameraSystem().printToolsInformation();
+                gameEngine.getInventoryModel().setSelectedIndexArms(0);
+                gameEngine.getCameraSystem().printArmsInformation();
                 break;
             case "2":
-                gameEngine.getInventoryModel().setSelectedItem(1);
-                gameEngine.getCameraSystem().printToolsInformation();
+                gameEngine.getInventoryModel().setSelectedIndexArms(1);
+                gameEngine.getCameraSystem().printArmsInformation();
+                break;
+            case "o":
+                gameEngine.getCameraSystem().printItemsInformation();
+                break;
+            case "0":
+                gameEngine.getInventoryModel().applyFirstAid(gameEngine);
+                gameEngine.getCameraSystem().printItemsInformation();
                 break;
             case "§":
                 gameEngine.getCollisionSystem().playerHit();
+                break;
+            case "e":
+                gameEngine.getCollisionSystem().pickUpItem();
                 break;
             case "q":
                 gameEngine.setRunning(false);

@@ -1,11 +1,11 @@
 package systems;
 
 import engine.GameEngine;
-import model.actors.Actor;
-import model.actors.Player;
-import model.entities.Entity;
+import models.actors.Actor;
+import models.actors.Player;
+import models.entities.Entity;
+import models.entities.FirstAid;
 
-import javax.swing.text.PlainDocument;
 import java.util.ArrayList;
 
 public class CameraSystem {
@@ -69,21 +69,21 @@ public class CameraSystem {
 
     public void printInstructions() {
         System.out.println("Instructions:");
-        System.out.println("(w) - Press to Move Up");
-        System.out.println("(s) - Press to Move Down");
-        System.out.println("(a) - Press to Move Left");
-        System.out.println("(d) - Press to Move Right");
+        System.out.println("(w),(s),(a),(d) - Press to Move");
         System.out.println("(§) - Press to Attack");
         System.out.println("(i) - Press to see stuff information");
         System.out.println("(1) - Press to choose Axe");
         System.out.println("(2) - Press to choose Pickaxe");
+        System.out.println("(e) - Press to pick up item");
+        System.out.println("(o) - Press to see item information");
+        System.out.println("(0) - Press to apply First Aid");
         System.out.println("(q) - Press to Quit Game\n");
     }
 
-    public void printToolsInformation() {
+    public void printArmsInformation() {
         String[] selectedItems = new String[2];
 
-        if (gameEngine.getInventoryModel().selectedIndex == 0) {
+        if (gameEngine.getInventoryModel().getSelectedIndexArms() == 0) {
             selectedItems[0] = " <--";
             selectedItems[1] = "";
         } else {
@@ -91,12 +91,24 @@ public class CameraSystem {
             selectedItems[1] = " <--";
         }
 
-        for (int i = 0; i < gameEngine.getInventoryModel().items.size(); i++) {
-            System.out.print(gameEngine.getInventoryModel().items.get(i).getName()
-                    + " " + gameEngine.getInventoryModel().items.get(i).getValue());
+        System.out.println("Arms:");
+        for (int i = 0; i < gameEngine.getInventoryModel().getArms().size(); i++) {
+            System.out.print(i + " " + gameEngine.getInventoryModel().getArms().get(i).getName()
+                    + " " + gameEngine.getInventoryModel().getArms().get(i).getValue());
             System.out.println(selectedItems[i]);
         }
 
+    }
+
+    public void printItemsInformation() {
+        if(gameEngine.getInventoryModel().getItems().isEmpty() != true){
+            System.out.println("Items:");
+            for (Entity entity : gameEngine.getInventoryModel().getItems()) {
+                FirstAid firstAid = (FirstAid) entity;
+                System.out.println(firstAid.getName()
+                        + " " + firstAid.getRepairHealthsValue());
+            }
+        }
     }
 
     public void printQuit() {
