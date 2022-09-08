@@ -5,5 +5,6 @@ public class Pickaxe extends Arms {
         this.name = "PICK";
         this.durability = 2;
         this.hitValue = 5;
+        this.usageStatus = usageValue.NOT_BROKEN;
     }
 }

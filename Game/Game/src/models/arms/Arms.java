@@ -5,6 +5,8 @@ public class Arms {
     protected int durability;
     protected int hitValue;
 
+    protected usageValue usageStatus;
+
     public enum usageValue {
         UNUSED,
         NOT_BROKEN,
@@ -13,15 +15,20 @@ public class Arms {
 
     public String getName() {return this.name;}
 
-    public usageValue decrementValue() {
+    public void decrementValue() {
         durability--;
-        if (durability <= 0) return usageValue.BROKEN;
-        return usageValue.NOT_BROKEN;
+        if (durability <= 0) {
+            usageStatus = usageValue.BROKEN;
+        }
     }
 
     public int getValue() { return durability; }
 
     public int getHitValue() {
         return hitValue;
+    }
+
+    public usageValue getUsageStatus() {
+        return usageStatus;
     }
 }

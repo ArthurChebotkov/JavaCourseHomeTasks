@@ -46,14 +46,6 @@ public class CollisionSystem {
             }
         }
 
-/*        for (int i = 0; i < gameEngine.getScene().getItemsByName("firstAid").size(); i++) {
-            if (position.equals(gameEngine.getScene().getItemsByName("firstAid").get(i).getPosition())) {
-                FirstAid firstAid = (FirstAid) gameEngine.getScene().getItemsByName("firstAid").get(i);
-                player.incrementHealth(firstAid.getRepairHealthsValue());
-                gameEngine.getScene().getItemsByName("firstAid").remove(i);
-                break;
-            }
-        }*/
 
         KillerPlayer killerPlayer = (KillerPlayer) (gameEngine.getScene().getActorsByName("killerPlayer"));
         if(gameEngine.getScene().getActorsByName("killerPlayer").getLiveValue() == Actor.LiveValue.LIVE) {
@@ -80,8 +72,8 @@ public class CollisionSystem {
                 if(killerPlayer.getLiveValue() == Actor.LiveValue.DEAD){
                     killerPlayer.setPositionOfFirstAid();
                     gameEngine.getScene().getItemsByName("firstAid").add(killerPlayer.getItemInside());
-
                 }
+                gameEngine.getInventoryModel().getCurrentItem().decrementValue();
             }
         }
     }

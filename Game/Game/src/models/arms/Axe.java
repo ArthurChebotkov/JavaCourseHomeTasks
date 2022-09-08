@@ -5,5 +5,6 @@ public class Axe extends Arms {
         this.name = "AXE";
         this.durability = 10;
         this.hitValue = 1;
+        this.usageStatus = usageValue.NOT_BROKEN;
     }
 }

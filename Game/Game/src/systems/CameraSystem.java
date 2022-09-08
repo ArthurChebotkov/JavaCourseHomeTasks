@@ -102,7 +102,7 @@ public class CameraSystem {
 
     public void printItemsInformation() {
         if(gameEngine.getInventoryModel().getItems().isEmpty() != true){
-            System.out.println("Items:");
+            System.out.println("\nItems (press (e) to apply):");
             for (Entity entity : gameEngine.getInventoryModel().getItems()) {
                 FirstAid firstAid = (FirstAid) entity;
                 System.out.println(firstAid.getName()
@@ -111,12 +111,18 @@ public class CameraSystem {
         }
     }
 
+    public void applyFirstAid() {
+        System.out.println("\nFirst Aid was applying");
+        System.out.println("Player health is: " + gameEngine.getScene().getActorsByName("player").getHealth());
+    }
+
     public void printQuit() {
         System.out.println("\nQuitting");
     }
 
     public void printPlayerDead() {
         System.out.println("\nHealts: " + gameEngine.getScene().getActorsByName("player").getHealth() + ". Player id dead!");
+        System.out.println();
     }
 
 }

@@ -13,7 +13,6 @@ public class InventoryModel {
 
     private ArrayDeque<FirstAid> items;
     private HashMap<Integer, Arms> arms;
-//    private HashMap<Integer, Entity> items;
     private int selectedIndexArms;
 
     public InventoryModel(){
@@ -50,8 +49,9 @@ public class InventoryModel {
 
     public void applyFirstAid(GameEngine gameEngine) {
         if(items.isEmpty() != true){
-            FirstAid firstAid = (FirstAid) items.pop();
+            FirstAid firstAid = items.pop();
             gameEngine.getScene().getActorsByName("player").incrementHealth(firstAid.getRepairHealthsValue());
+            gameEngine.getCameraSystem().applyFirstAid();
         }
     }
 
